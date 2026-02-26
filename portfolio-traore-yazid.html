@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traore Yazid | Digital AI Creator</title>
+  <style>
+    :root {
+      --navy: #0A1628;
+      --navy-mid: #112240;
+      --navy-light: #1a3a6b;
+      --gold: #C9A84C;
+      --gold-light: #e8c96a;
+      --white: #FFFFFF;
+      --text-muted: #8892a4;
+      --border: rgba(201,168,76,0.2);
+      --font-display: Georgia, 'Times New Roman', serif;
+      --font-body: 'Segoe UI', Arial, sans-serif;
+      --yt-rose: #EFA6A0;
+      --yt-grey-blue: #4f6673;
+      --africom-blue: #262b5f;
+      --africom-yellow: #E0DA09;
+      --africom-grey: #B8BCCF;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background-color: var(--navy); color: var(--white); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 6%; background: rgba(10,22,40,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+    .nav-logo span { color: var(--white); font-weight: 300; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.nav-active { color: var(--gold); }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 8rem 6% 4rem; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; right: -200px; top: 50%; transform: translateY(-50%); width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%); pointer-events: none; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem; padding: 0.45rem 1.1rem; border: 1px solid var(--border); }
+    .hero-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0.3} }
+    .hero-name { font-family: var(--font-display); font-size: clamp(3.2rem,6vw,5.8rem); font-weight: 700; line-height: 1.05; margin-bottom: 0.6rem; }
+    .hero-name .gold { color: var(--gold); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(1rem,2vw,1.5rem); font-weight: 300; font-style: italic; color: var(--text-muted); margin-bottom: 1.8rem; letter-spacing: 0.04em; }
+    .hero-divider { width: 55px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 1.8rem; }
+    .hero-desc { font-size: 0.98rem; line-height: 1.85; color: #a8b4c5; max-width: 480px; margin-bottom: 2.8rem; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { padding: 0.9rem 2.2rem; background: var(--gold); color: var(--navy); border: none; font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.3s; cursor: pointer; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.35); }
+    .btn-secondary { padding: 0.9rem 2.2rem; background: transparent; color: var(--gold); border: 1px solid var(--gold); font-family: var(--font-body); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: all 0.3s; }
+    .btn-secondary:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+    .hero-photo { display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; }
+    .photo-frame { position: relative; width: 340px; height: 420px; }
+    .photo-border { position: absolute; inset: 0; border: 2px solid rgba(201,168,76,0.6); }
+    .photo-shadow { position: absolute; bottom: -18px; right: -18px; width: 100%; height: 100%; border: 1px solid rgba(201,168,76,0.2); }
+    .photo-inner { width: 100%; height: 100%; background: linear-gradient(135deg, var(--navy-mid), var(--navy-light)); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; overflow: hidden; position: relative; }
+    .photo-inner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .photo-icon { font-size: 3.5rem; opacity: 0.2; }
+    .photo-hint { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* SECTIONS */
+    section { padding: 6rem 6%; position: relative; }
+    .eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .s-title { font-family: var(--font-display); font-size: clamp(2rem,4vw,3rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.1; }
+    .s-rule { width: 48px; height: 2px; background: var(--gold); margin-bottom: 3rem; }
+    .m-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+    /* ABOUT */
+    #about { background: var(--navy-mid); }
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 0.97rem; line-height: 1.9; color: #a8b4c5; margin-bottom: 1.2rem; }
+    .about-text strong { color: var(--gold); font-weight: 600; }
+    .certif-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .certif-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; border: 1px solid var(--border); border-left: 3px solid var(--gold); background: rgba(201,168,76,0.02); transition: background 0.3s; }
+    .certif-item:hover { background: rgba(201,168,76,0.06); }
+    .c-icon { font-size: 1.3rem; min-width: 26px; text-align: center; }
+    .c-name { font-size: 0.84rem; font-weight: 600; color: var(--white); }
+    .c-src { font-size: 0.73rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+    /* SKILLS */
+    #skills { background: var(--navy); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 1.5rem; }
+    .skill-card { padding: 2rem 1.5rem; border: 1px solid var(--border); background: rgba(201,168,76,0.02); position: relative; overflow: hidden; transition: all 0.35s; }
+    .skill-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+    .skill-card:hover::after { transform: scaleX(1); }
+    .skill-card:hover { background: rgba(201,168,76,0.05); transform: translateY(-4px); }
+    .sk-emoji { font-size: 2rem; margin-bottom: 1rem; }
+    .sk-name { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .sk-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
+    .sk-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; }
+    .sk-tag { font-size: 0.62rem; font-weight: 600; padding: 0.2rem 0.55rem; border: 1px solid var(--border); color: var(--gold); }
+
+    /* PROJETS */
+    #projets { background: var(--navy-mid); }
+    .project-selector { display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .proj-tab { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 2rem; border: 1px solid var(--border); background: transparent; cursor: pointer; transition: all 0.3s; font-family: var(--font-body); }
+    .proj-tab:hover { border-color: rgba(201,168,76,0.5); }
+    .proj-tab.active { background: rgba(201,168,76,0.07); border-color: var(--gold); }
+    .proj-tab-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.2rem; }
+    .proj-tab-name { font-size: 0.85rem; font-weight: 700; color: var(--white); letter-spacing: 0.05em; text-transform: uppercase; }
+    .proj-tab-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.15rem; }
+    .proj-tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .proj-tab-dot.rose { background: #EFA6A0; }
+    .proj-tab-dot.blue { background: var(--africom-yellow); }
+    .project-panel { display: none; }
+    .project-panel.active { display: block; }
+
+    /* BADGES */
+    .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: flex-start; }
+    .badge { padding: 0.35rem 0.9rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .badge-gold { background: var(--gold); color: var(--navy); }
+    .badge-out { border: 1px solid var(--border); color: var(--text-muted); }
+    .badge-rose { background: #EFA6A0; color: #fff; }
+    .badge-grey-blue { background: #4f6673; color: #fff; }
+    .badge-africom { background: var(--africom-blue); color: var(--africom-yellow); border: 1px solid var(--africom-yellow); }
+
+    /* FONDATION YT */
+    .yt-wrap { display: flex; flex-direction: column; gap: 3rem; }
+    .yt-block { border: 1px solid rgba(239,166,160,0.3); overflow: hidden; background: rgba(10,22,40,0.5); position: relative; }
+    .yt-block::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(239,166,160,0.06) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+    .yt-block > * { position: relative; z-index: 1; }
+    .yt-block-header { padding: 2rem 2.5rem; border-bottom: 1px solid rgba(239,166,160,0.2); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; background: linear-gradient(90deg, rgba(239,166,160,0.09) 0%, transparent 100%); }
+    .yt-block-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #EFA6A0; margin-bottom: 0.3rem; }
+    .yt-block-title { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--white); }
+    .yt-block-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .yt-block-body { display: grid; grid-template-columns: 1fr 1fr; }
+    .yt-block-desc { padding: 2.5rem; border-right: 1px solid rgba(239,166,160,0.2); }
+    .yt-block-desc p { font-size: 0.95rem; line-height: 1.85; color: #a8b4c5; margin-bottom: 1.4rem; }
+    .yt-block-desc strong { color: #EFA6A0; }
+    .yt-block-media { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.8rem; }
+
+    /* Charte summary */
+    .yt-charte-summary { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid rgba(239,166,160,0.2); }
+    .yt-charte-col { padding: 2rem 2.5rem; }
+    .yt-charte-col:first-child { border-right: 1px solid rgba(239,166,160,0.2); }
+    .yt-charte-col p { font-size: 0.92rem; line-height: 1.85; color: #a8b4c5; margin-bottom: 1.2rem; }
+    .yt-charte-col strong { color: #EFA6A0; }
+
+    /* TABS */
+    .tabs-bar { display: flex; flex-wrap: wrap; }
+    .tabs-bar.rose { background: rgba(239,166,160,0.05); border-bottom: 1px solid rgba(239,166,160,0.2); }
+    .tabs-bar.blue { background: rgba(38,43,95,0.2); border-bottom: 1px solid rgba(38,43,95,0.5); }
+    .tab-btn { padding: 0.85rem 1.5rem; background: transparent; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: all 0.3s; }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.rose-active { color: #EFA6A0; border-bottom-color: #EFA6A0; }
+    .tab-btn.blue-active { color: var(--africom-yellow); border-bottom-color: var(--africom-yellow); }
+    .tab-panel { display: none; padding: 2.5rem; }
+    .tab-panel.active { display: block; }
+
+    /* Swatches */
+    .color-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+    .swatch { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .sw-circle { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 2px 12px rgba(0,0,0,0.35); }
+    .sw-label { font-size: 0.57rem; color: var(--text-muted); letter-spacing: 0.08em; text-align: center; text-transform: uppercase; }
+    .sw-hex { font-size: 0.6rem; font-family: monospace; }
+    .sw-hex.rose { color: #EFA6A0; }
+    .sw-hex.yellow { color: var(--africom-yellow); }
+
+    /* Typo inline */
+    .typo-inline { padding: 1rem; border-left: 3px solid; margin-bottom: 0.8rem; }
+    .typo-inline.rose { border-color: #EFA6A0; background: rgba(239,166,160,0.04); }
+    .typo-inline.blue { border-color: var(--africom-yellow); background: rgba(38,43,95,0.1); }
+    .typo-tag { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .typo-tag.rose { color: #EFA6A0; }
+    .typo-tag.blue { color: var(--africom-yellow); }
+    .typo-big { font-size: 1.5rem; font-weight: 800; color: var(--white); letter-spacing: 0.06em; }
+    .typo-body-text { font-size: 0.88rem; color: #a8b4c5; line-height: 1.7; }
+
+    /* Deliverables */
+    .deliv-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .deliv-list li { display: flex; align-items: center; gap: 0.8rem; font-size: 0.87rem; color: var(--white); padding: 0.55rem 0.8rem; }
+    .deliv-list.rose li { border-left: 2px solid #EFA6A0; background: rgba(239,166,160,0.05); }
+    .deliv-list.yellow li { border-left: 2px solid var(--africom-yellow); background: rgba(38,43,95,0.08); }
+    .deliv-list li::before { font-size: 0.65rem; flex-shrink: 0; }
+    .deliv-list.rose li::before { content: '▸'; color: #EFA6A0; }
+    .deliv-list.yellow li::before { content: '▸'; color: var(--africom-yellow); }
+
+    /* Palette grid */
+    .pal-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; }
+    .pal-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid; }
+    .pal-item.rose { border-color: rgba(239,166,160,0.18); background: rgba(239,166,160,0.03); }
+    .pal-item.blue { border-color: rgba(38,43,95,0.4); background: rgba(38,43,95,0.05); }
+    .pal-swatch { width: 56px; height: 56px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.07); }
+    .pal-name { font-size: 0.82rem; font-weight: 600; color: var(--white); margin-bottom: 0.25rem; }
+    .pal-hex { font-size: 0.7rem; font-family: monospace; margin-bottom: 0.2rem; }
+    .pal-hex.rose { color: #EFA6A0; }
+    .pal-hex.blue { color: var(--africom-yellow); }
+    .pal-desc { font-size: 0.68rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* Typo block */
+    .typo-block { padding: 1.5rem; margin-bottom: 1rem; }
+    .typo-block.rose { border: 1px solid rgba(239,166,160,0.2); background: rgba(239,166,160,0.03); }
+    .typo-block.blue { border: 1px solid rgba(38,43,95,0.5); background: rgba(38,43,95,0.05); }
+    .typo-block-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; }
+    .typo-block-hdr.rose { border-bottom: 1px solid rgba(239,166,160,0.15); }
+    .typo-block-hdr.blue { border-bottom: 1px solid rgba(38,43,95,0.4); }
+    .typo-role { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .typo-role.rose { color: #EFA6A0; }
+    .typo-role.blue { color: var(--africom-yellow); }
+    .typo-usage { font-size: 0.65rem; color: var(--text-muted); }
+    .specimen-big { font-size: 1.9rem; font-weight: 800; color: var(--white); letter-spacing: 0.05em; }
+    .specimen-oswald { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; text-transform: uppercase; }
+    .specimen-body { font-size: 0.9rem; color: #a8b4c5; line-height: 1.8; }
+
+    /* Logo règles */
+    .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .rule-item { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.9rem; }
+    .rule-item.rose { border: 1px solid rgba(239,166,160,0.2); background: rgba(239,166,160,0.03); }
+    .rule-item.blue { border: 1px solid rgba(38,43,95,0.4); background: rgba(38,43,95,0.05); }
+    .rule-ic { font-size: 1.2rem; flex-shrink: 0; }
+    .rule-t { font-size: 0.82rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .rule-d { font-size: 0.74rem; color: var(--text-muted); line-height: 1.6; }
+    .dim-row { padding: 0.75rem 1rem; font-size: 0.82rem; color: #a8b4c5; margin-bottom: 0.5rem; border: 1px solid; }
+    .dim-row.rose { border-color: rgba(239,166,160,0.2); background: rgba(239,166,160,0.04); }
+    .dim-row.blue { border-color: rgba(38,43,95,0.4); background: rgba(38,43,95,0.07); }
+    .dim-row span.rose { color: #EFA6A0; font-weight: 600; }
+    .dim-row span.yellow { color: var(--africom-yellow); font-weight: 600; }
+
+    /* Supports */
+    .supports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 1rem; }
+    .support-card { padding: 1.4rem; text-align: center; }
+    .support-card.rose { border: 1px solid rgba(239,166,160,0.2); background: rgba(239,166,160,0.03); }
+    .sup-icon { font-size: 1.8rem; margin-bottom: 0.7rem; }
+    .sup-name { font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 0.35rem; }
+    .sup-desc { font-size: 0.69rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* Video & visuals */
+    .video-box { background: var(--navy); border: 1px solid rgba(239,166,160,0.25); aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .video-box:hover { border-color: rgba(239,166,160,0.6); }
+    .video-box video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .play-btn { width: 54px; height: 54px; border-radius: 50%; background: #EFA6A0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--white); font-weight: 700; position: relative; z-index: 1; }
+    .video-cap { font-size: 0.73rem; color: var(--text-muted); text-align: center; line-height: 1.6; position: relative; z-index: 1; }
+    .video-cap span { color: #EFA6A0; }
+    .visual-box-single { width: 100%; aspect-ratio: 16/7; background: var(--navy); border: 1px solid rgba(239,166,160,0.25); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; text-align: center; position: relative; overflow: hidden; transition: border-color 0.3s; cursor: zoom-in; }
+    .visual-box-single:hover { border-color: rgba(239,166,160,0.5); }
+    .visual-box-single img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
+    .v-icon { font-size: 1.8rem; opacity: 0.2; }
+
+    /* AFRICOM */
+    .africom-block { border: 1px solid rgba(38,43,95,0.7); overflow: hidden; background: rgba(10,22,40,0.5); position: relative; }
+    .africom-block::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(38,43,95,0.14) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+    .africom-block > * { position: relative; z-index: 1; }
+    .africom-header { padding: 2.5rem; border-bottom: 1px solid rgba(38,43,95,0.5); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.2rem; background: linear-gradient(90deg, rgba(38,43,95,0.3) 0%, transparent 100%); }
+    .africom-cat { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--africom-yellow); margin-bottom: 0.5rem; }
+    .africom-name { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .africom-sub { font-size: 0.9rem; color: var(--text-muted); }
+    .africom-body { display: grid; grid-template-columns: 1fr 1fr; }
+    .africom-desc { padding: 2.5rem; border-right: 1px solid rgba(38,43,95,0.5); }
+    .africom-desc p { font-size: 0.95rem; line-height: 1.85; color: #a8b4c5; margin-bottom: 1.6rem; }
+    .africom-desc strong { color: var(--africom-yellow); }
+    .africom-media { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.8rem; }
+    .africom-logo-preview { aspect-ratio: 16/7; border: 1px solid rgba(224,218,9,0.3); display: flex; align-items: center; justify-content: center; background: var(--africom-blue); position: relative; overflow: hidden; cursor: zoom-in; transition: border-color 0.3s; }
+    .africom-logo-preview:hover { border-color: var(--africom-yellow); }
+    .africom-logo-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 1rem; }
+    .logo-fake { display: flex; align-items: center; gap: 1rem; }
+    .logo-fake-icon { width: 52px; height: 52px; clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%); background: var(--africom-yellow); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 900; color: var(--africom-blue); font-family: Georgia, serif; }
+    .logo-fake-name { font-family: Georgia, serif; font-size: 2rem; font-weight: 700; color: var(--white); letter-spacing: 0.1em; }
+    .logo-fake-name span { color: var(--africom-yellow); }
+    .logo-fake-tagline { font-size: 0.62rem; color: var(--africom-grey); letter-spacing: 0.25em; text-transform: uppercase; margin-top: 0.1rem; }
+    .africom-variants-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .africom-variant-box { padding: 1.5rem; display: flex; align-items: center; justify-content: center; min-height: 90px; border: 1px solid rgba(38,43,95,0.5); position: relative; overflow: hidden; }
+    .africom-variant-box img { width: 100%; height: 100%; object-fit: contain; max-height: 70px; }
+    .av-bg-dark { background: var(--africom-blue); }
+    .av-bg-light { background: #fff; }
+    .av-bg-mid { background: #1a1a2e; }
+    .av-label { text-align: center; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.4rem; }
+    .africom-visuals { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .africom-visual-box { aspect-ratio: 1; border: 1px solid rgba(38,43,95,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.68rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; text-align: center; padding: 1rem; position: relative; overflow: hidden; transition: border-color 0.3s, background 0.3s; cursor: zoom-in; }
+    .africom-visual-box:hover { border-color: var(--africom-yellow); background: rgba(38,43,95,0.2); }
+    .africom-visual-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .av-icon { font-size: 1.6rem; }
+    .africom-tabs-wrap { border: 1px solid rgba(38,43,95,0.5); border-top: none; overflow: hidden; }
+
+    /* GALLERY */
+    #gallery { background: var(--navy); }
+    .gallery-intro { font-size: 0.97rem; line-height: 1.8; color: #a8b4c5; max-width: 580px; margin-bottom: 2.5rem; }
+    .gallery-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .gtab { padding: 0.75rem 1.8rem; background: transparent; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: all 0.3s; }
+    .gtab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .gtab:hover { color: var(--white); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(250px,1fr)); gap: 1rem; }
+    .gallery-item { aspect-ratio: 4/3; background: var(--navy-mid); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; position: relative; overflow: hidden; transition: border-color 0.3s; cursor: zoom-in; }
+    .gallery-item:hover { border-color: rgba(201,168,76,0.5); }
+    .gallery-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .g-icon { font-size: 1.8rem; opacity: 0.2; }
+
+    /* CONTACT */
+    #contact { background: var(--navy-mid); text-align: center; }
+    .contact-intro { font-size: 0.97rem; line-height: 1.8; color: #a8b4c5; max-width: 500px; margin: 0 auto 3rem; }
+    .contact-cards { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-card { display: flex; align-items: center; gap: 1rem; padding: 1.3rem 2rem; border: 1px solid var(--border); text-decoration: none; color: var(--white); transition: all 0.3s; min-width: 230px; background: rgba(201,168,76,0.01); }
+    .contact-card:hover { border-color: rgba(201,168,76,0.6); background: rgba(201,168,76,0.05); transform: translateY(-3px); }
+    .cc-icon { font-size: 1.6rem; }
+    .cc-type { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+    .cc-val { font-size: 0.88rem; font-weight: 600; color: var(--gold); margin-top: 0.2rem; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 2rem 6%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-brand { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--gold); }
+    .footer-copy { font-size: 0.76rem; color: var(--text-muted); }
+
+    /* LIGHTBOX */
+    .lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; align-items: center; justify-content: center; padding: 2rem; cursor: zoom-out; }
+    .lightbox-overlay.active { display: flex; }
+    .lightbox-img { max-width: 90vw; max-height: 88vh; object-fit: contain; border: 1px solid rgba(201,168,76,0.4); box-shadow: 0 0 80px rgba(0,0,0,0.9); cursor: default; animation: lb-in 0.25s ease; }
+    @keyframes lb-in { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+    .lightbox-close { position: fixed; top: 1.2rem; right: 1.8rem; font-size: 2.2rem; color: var(--gold); cursor: pointer; z-index: 10000; transition: color 0.2s, transform 0.2s; }
+    .lightbox-close:hover { color: white; transform: rotate(90deg); }
+    .lightbox-caption { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; z-index: 10000; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; text-align: center; padding-top: 7rem; }
+      .hero-divider { margin: 1.5rem auto; }
+      .hero-desc { margin: 0 auto 2.5rem; }
+      .hero-cta { justify-content: center; }
+      .hero-photo { margin-top: 3rem; order: -1; }
+      .photo-frame { width: 220px; height: 270px; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .yt-block-body { grid-template-columns: 1fr; }
+      .yt-block-desc { border-right: none; border-bottom: 1px solid rgba(239,166,160,0.2); }
+      .yt-charte-summary { grid-template-columns: 1fr; }
+      .yt-charte-col:first-child { border-right: none; border-bottom: 1px solid rgba(239,166,160,0.2); }
+      .africom-body { grid-template-columns: 1fr; }
+      .africom-desc { border-right: none; border-bottom: 1px solid rgba(38,43,95,0.5); }
+      .africom-variants-grid { grid-template-columns: 1fr 1fr; }
+      .pal-grid, .rules-grid { grid-template-columns: 1fr; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">TY<span> Digital AI</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#gallery">Galerie</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content reveal">
+      <div class="hero-tag"><div class="hero-dot"></div>Disponible pour missions &amp; opportunités</div>
+      <h1 class="hero-name">Traore<br><span class="gold">Yazid</span></h1>
+      <p class="hero-title">Digital AI Creator | Créativité × Intelligence Artificielle</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Je conçois des expériences digitales qui combinent créativité visuelle et puissance de l'IA — identités de marque, stratégies de communication, contenus génératifs et solutions automatisées.</p>
+      <div class="hero-cta">
+        <a href="#projets" class="btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn-secondary">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-photo reveal" style="transition-delay:0.2s">
+      <div class="photo-frame">
+        <div class="photo-border"></div>
+        <div class="photo-shadow"></div>
+        <div class="photo-inner">
+        <img src="images/ma-photo.png" alt="Traore Yazid" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="about">
+    <div class="reveal">
+      <p class="eyebrow">01 — Qui suis-je ?</p>
+      <h2 class="s-title">À propos de moi</h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>Digital AI Creator certifié, je suis basé à <strong>Abidjan, Côte d'Ivoire</strong>, avec une double compétence en <strong>création de contenu digital</strong> et en <strong>intelligence artificielle appliquée</strong>.</p>
+        <p>Certifié <strong>IA Product Creator par Emploi jeunes CI & Banhoro Services</strong>, j'ai acquis une expérience pratique en conception de visuels, en stratégies de communication, en automatisation et en développement de chatbots IA. Je suis orienté produit, créativité et expérience utilisateur.</p>
+        <p>Actuellement en <strong>Master 2 Ingénierie Informatique (ENSIT)</strong>, je combine formation académique et pratique terrain pour proposer des solutions digitales innovantes à mes clients et partenaires.</p>
+      </div>
+      <div class="certif-list reveal" style="transition-delay:0.15s">
+        <div class="certif-item"><div class="c-icon">🏆</div><div><div class="c-name">IA Product Creator</div><div class="c-src">Simplon Côte d'Ivoire</div></div></div>
+        <div class="certif-item"><div class="c-icon">📊</div><div><div class="c-name">Introduction au Machine Learning</div><div class="c-src">Kaggle</div></div></div>
+        <div class="certif-item"><div class="c-icon">🐍</div><div><div class="c-name">Programmation Python</div><div class="c-src">Kaggle</div></div></div>
+        <div class="certif-item"><div class="c-icon">🌐</div><div><div class="c-name">HTML, CSS, JavaScript</div><div class="c-src">OpenClassrooms</div></div></div>
+        <div class="certif-item"><div class="c-icon">💻</div><div><div class="c-name">Programmation en C</div><div class="c-src">OpenClassrooms</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section id="skills">
+    <div class="reveal">
+      <p class="eyebrow">02 — Expertise</p>
+      <h2 class="s-title">Compétences clés</h2>
+      <div class="s-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="sk-emoji">🤖</div><div class="sk-name">IA Générative</div><div class="sk-desc">Création de contenus visuels, vidéos et textes grâce aux derniers modèles d'IA générative.</div><div class="sk-tags"><span class="sk-tag">ChatGPT</span><span class="sk-tag">Gemini</span><span class="sk-tag">Veo 3</span><span class="sk-tag">Sora</span></div></div>
+      <div class="skill-card reveal" style="transition-delay:0.08s"><div class="sk-emoji">🎨</div><div class="sk-name">Design & Identité visuelle</div><div class="sk-desc">Logos, chartes graphiques, visuels de campagne et identités de marque complètes.</div><div class="sk-tags"><span class="sk-tag">Canva</span><span class="sk-tag">Logo</span><span class="sk-tag">Charte graphique</span></div></div>
+      <div class="skill-card reveal" style="transition-delay:0.16s"><div class="sk-emoji">💬</div><div class="sk-name">Chatbots & Automatisation</div><div class="sk-desc">Conception et déploiement de chatbots IA et workflows automatisés pour les entreprises.</div><div class="sk-tags"><span class="sk-tag">Landbot</span><span class="sk-tag">n8n</span></div></div>
+      <div class="skill-card reveal" style="transition-delay:0.24s"><div class="sk-emoji">📱</div><div class="sk-name">Stratégie digitale</div><div class="sk-desc">Élaboration de stratégies de communication digitale et animation de communautés en ligne.</div><div class="sk-tags"><span class="sk-tag">Social Media</span><span class="sk-tag">Content Strategy</span></div></div>
+      <div class="skill-card reveal" style="transition-delay:0.32s"><div class="sk-emoji">📊</div><div class="sk-name">Data & IA Analytique</div><div class="sk-desc">Analyse de données massives, modélisation prédictive et visualisation pour la décision.</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">Pandas</span><span class="sk-tag">Scikit-learn</span></div></div>
+      <div class="skill-card reveal" style="transition-delay:0.4s"><div class="sk-emoji">⚙️</div><div class="sk-name">Développement Web</div><div class="sk-desc">Applications web et desktop orientées métier et expérience utilisateur.</div><div class="sk-tags"><span class="sk-tag">React</span><span class="sk-tag">JavaScript</span><span class="sk-tag">HTML/CSS</span></div></div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="reveal">
+      <p class="eyebrow">03 — Réalisations</p>
+      <h2 class="s-title">Mes projets</h2>
+      <div class="s-rule"></div>
+    </div>
+
+    <div class="project-selector reveal">
+      <div class="proj-tab active" onclick="switchProj('fondation-yt', this)">
+        <div class="proj-tab-dot rose"></div>
+        <div>
+          <div class="proj-tab-num">01</div>
+          <div class="proj-tab-name">Fondation YT</div>
+          <div class="proj-tab-sub">Campagne ONG · Charte graphique</div>
+        </div>
+      </div>
+      <div class="proj-tab" onclick="switchProj('africom', this)">
+        <div class="proj-tab-dot blue"></div>
+        <div>
+          <div class="proj-tab-num">02</div>
+          <div class="proj-tab-name">AFRICOM</div>
+          <div class="proj-tab-sub">Identité visuelle complète</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL : FONDATION YT -->
+    <div class="project-panel active" id="panel-fondation-yt">
+      <div class="yt-wrap">
+
+        <!-- Bloc A : Campagne -->
+        <div class="yt-block reveal">
+          <div class="yt-block-header">
+            <div>
+              <div class="yt-block-cat">Campagne audiovisuelle · Stratégie digitale · Vidéo IA</div>
+              <div class="yt-block-title">Campagne ONG — Fondation YT</div>
+              <div class="yt-block-sub">Protection &amp; Avenir des Femmes</div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-gold">Projet certifié</span>
+              <span class="badge badge-out">Simplon CI</span>
+              <span class="badge badge-out">2025 – 2026</span>
+            </div>
+          </div>
+          <div class="yt-block-body">
+            <div class="yt-block-desc">
+              <p>Conception complète de l'identité visuelle et de la stratégie de communication digitale pour la <strong>Fondation YT</strong>, une ONG engagée dans la prévention des grossesses à risque et la protection de la santé, de la dignité et de l'avenir des femmes.</p>
+              <p>Ce projet couvre l'ensemble du processus créatif — de la définition de l'identité de marque jusqu'à la production audiovisuelle générée par IA (Veo 3).</p>
+              <div class="m-label" style="margin-top:0.5rem; margin-bottom:0.8rem">📦 Livrables de la campagne</div>
+              <ul class="deliv-list rose">
+                <li>Logo & identité visuelle complète</li>
+                <li>Charte graphique (couleurs, typographies, règles)</li>
+                <li>Stratégie de communication digitale</li>
+                <li>Vidéo de campagne générée par IA — Veo 3</li>
+                <li>Templates réseaux sociaux & supports print</li>
+              </ul>
+            </div>
+            <div class="yt-block-media">
+              <div>
+                <div class="m-label">🎬 Vidéo de campagne — Veo 3</div>
+                <div class="video-box">
+                  <video controls><source src="videos/fondation-yt.mp4" type="video/mp4"></video>
+                </div>
+              </div>
+              <div>
+                <div class="m-label">🖼️ Visuels de campagne</div>
+                <div class="visual-box-single">
+                  <img src="images/logo-fondation-yt.png" alt="Logo Fondation YT" />
+                  <span>Logo Fondation YT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloc B : Charte graphique -->
+        <div class="yt-block reveal" style="transition-delay:0.15s">
+          <div class="yt-block-header">
+            <div>
+              <div class="yt-block-cat">Branding · Manuel d'identité visuelle · ONG</div>
+              <div class="yt-block-title">Charte graphique — Fondation YT</div>
+              <div class="yt-block-sub">Manuel complet d'identité visuelle</div>
+            </div>
+            <div class="badges">
+              <span class="badge badge-rose">Branding complet</span>
+              <span class="badge badge-grey-blue">Santé des femmes</span>
+            </div>
+          </div>
+
+          <div class="yt-charte-summary">
+            <div class="yt-charte-col">
+              <p>Le logo combine une <strong>forme de bouclier</strong> (protection), une <strong>silhouette féminine</strong> (féminité) et un <strong>cœur</strong> (vie et bienveillance). La femme protégée est au centre de l'action de la Fondation.</p>
+              <div class="m-label" style="margin-bottom:0.8rem">🎨 Palette chromatique</div>
+              <div class="color-row">
+                <div class="swatch"><div class="sw-circle" style="background:#EFA6A0"></div><div class="sw-label">Rose YT</div><div class="sw-hex rose">#EFA6A0</div></div>
+                <div class="swatch"><div class="sw-circle" style="background:#4f6673"></div><div class="sw-label">Gris-bleu</div><div class="sw-hex rose">#4f6673</div></div>
+                <div class="swatch"><div class="sw-circle" style="background:#FFFFFF; border-color:rgba(0,0,0,0.12)"></div><div class="sw-label">Blanc</div><div class="sw-hex rose">#FFFFFF</div></div>
+                <div class="swatch"><div class="sw-circle" style="background:#000000"></div><div class="sw-label">Noir</div><div class="sw-hex rose">#000000</div></div>
+              </div>
+            </div>
+            <div class="yt-charte-col">
+              <div class="m-label" style="margin-bottom:0.8rem">✍️ Typographie</div>
+              <div class="typo-inline rose">
+                <div class="typo-tag rose">Poppins — Titres (ExtraBold / Bold)</div>
+                <div class="typo-big">FONDATION YT</div>
+              </div>
+              <div class="typo-inline rose">
+                <div class="typo-tag rose">Montserrat — Corps de texte</div>
+                <div class="typo-body-text">Prévenir les grossesses à risque et accompagner les femmes avec bienveillance et engagement.</div>
+              </div>
+              <div class="m-label" style="margin-top:1.2rem; margin-bottom:0.6rem">📦 Livrables charte</div>
+              <ul class="deliv-list rose" style="gap:0.4rem">
+                <li>Logo principal + variations officielles</li>
+                <li>Zone de protection & tailles minimales</li>
+                <li>Patterns dérivés du logo</li>
+                <li>Papier en-tête, carte de visite, kakémono</li>
+                <li>Goodies & templates réseaux sociaux</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tabs-bar rose">
+            <button class="tab-btn rose-active" onclick="showTab('yt','palette',this)">🎨 Palette complète</button>
+            <button class="tab-btn" onclick="showTab('yt','typo',this)">✍️ Typographie</button>
+            <button class="tab-btn" onclick="showTab('yt','logo',this)">🔖 Logo & Règles</button>
+            <button class="tab-btn" onclick="showTab('yt','supports',this)">📋 Supports</button>
+          </div>
+
+          <div class="tab-panel active" id="yt-palette">
+            <div class="pal-grid">
+              <div class="pal-item rose"><div class="pal-swatch" style="background:#EFA6A0"></div><div><div class="pal-name">Rose Fondation YT</div><div class="pal-hex rose">#EFA6A0 · RVB 239/166/160 · CMJN 0/31/33/6</div><div class="pal-desc">Couleur identitaire principale. Féminité, vie, douceur et empathie envers les femmes.</div></div></div>
+              <div class="pal-item rose"><div class="pal-swatch" style="background:#4f6673"></div><div><div class="pal-name">Gris-bleu</div><div class="pal-hex rose">#4f6673 · Couleur de soutien</div><div class="pal-desc">Sobriété et professionnalisme. Textes, contours et éléments structurels.</div></div></div>
+              <div class="pal-item rose"><div class="pal-swatch" style="background:#FFFFFF; border:1px solid rgba(0,0,0,0.1)"></div><div><div class="pal-name">Blanc</div><div class="pal-hex rose">#FFFFFF · RVB 255/255/255 · CMJN 0/0/0/0</div><div class="pal-desc">Pureté, clarté, transparence et espoir. Fond principal de tous les supports.</div></div></div>
+              <div class="pal-item rose"><div class="pal-swatch" style="background:#000000"></div><div><div class="pal-name">Noir</div><div class="pal-hex rose">#000000 · RVB 0/0/0 · CMJN 0/0/0/100</div><div class="pal-desc">Usage limité : impressions monochromes et documents administratifs uniquement.</div></div></div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="yt-typo">
+            <div class="typo-block rose">
+              <div class="typo-block-hdr rose"><span class="typo-role rose">Police principale — POPPINS</span><span class="typo-usage">Titres · ExtraBold / Bold · Sous-titres</span></div>
+              <div class="specimen-big">FONDATION YT</div>
+              <div style="display:flex; gap:1.5rem; margin-top:0.8rem; flex-wrap:wrap">
+                <span style="font-size:1.2rem; font-weight:800; color:var(--white)">ExtraBold</span>
+                <span style="font-size:1.2rem; font-weight:700; color:#a8b4c5">Bold</span>
+                <span style="font-size:1.2rem; font-weight:400; color:var(--text-muted)">Regular</span>
+              </div>
+              <div style="margin-top:0.8rem; font-size:0.78rem; color:var(--text-muted)">Police moderne et lisible. Communication claire, élégante et accessible en cohérence avec la mission de la Fondation.</div>
+            </div>
+            <div class="typo-block rose">
+              <div class="typo-block-hdr rose"><span class="typo-role rose">Police secondaire — MONTSERRAT</span><span class="typo-usage">Corps de texte · 12pt/18pt · Normal/Gras</span></div>
+              <div class="specimen-body">Prévenir les grossesses à risque et accompagner les femmes avec bienveillance, responsabilité et engagement. Un monde où chaque femme est protégée, informée et accompagnée pour vivre une grossesse sans danger, en toute dignité.</div>
+              <div style="margin-top:0.8rem; font-size:0.78rem; color:var(--text-muted)">Polyvalente et accessible. Parfaite pour les textes courants, documents institutionnels et communications digitales.</div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="yt-logo">
+            <div class="rules-grid">
+              <div>
+                <div class="m-label" style="margin-bottom:1rem">🛡️ Symbologie du logo</div>
+                <div style="display:flex; flex-direction:column; gap:0.7rem">
+                  <div class="rule-item rose"><div class="rule-ic">🛡️</div><div><div class="rule-t">Forme de bouclier</div><div class="rule-d">Symbolise la protection — mission fondamentale de l'ONG envers les femmes vulnérables.</div></div></div>
+                  <div class="rule-item rose"><div class="rule-ic">👩</div><div><div class="rule-t">Silhouette féminine</div><div class="rule-d">Représente la féminité et place la femme au centre de l'action de la Fondation YT.</div></div></div>
+                  <div class="rule-item rose"><div class="rule-ic">❤️</div><div><div class="rule-t">Cœur</div><div class="rule-d">Incarne la vie et la bienveillance — valeurs essentielles de la Fondation.</div></div></div>
+                  <div class="rule-item rose"><div class="rule-ic">🔡</div><div><div class="rule-t">Initiales YT</div><div class="rule-d">Intégrées dans la composition pour ancrer l'identité institutionnelle.</div></div></div>
+                </div>
+              </div>
+              <div>
+                <div class="m-label" style="margin-bottom:1rem">📐 Zone de protection & tailles</div>
+                <div style="padding:1rem; border:1px solid rgba(239,166,160,0.25); background:rgba(239,166,160,0.04); margin-bottom:1rem; font-size:0.88rem; color:#a8b4c5; line-height:1.8">Une <span style="color:#EFA6A0; font-weight:600">zone minimale</span> doit être respectée autour du logo — aucun élément ne peut empiéter dans cet espace.</div>
+                <div class="dim-row rose"><span class="rose">Print :</span> Logo complet ≥ 25 mm (95 px) · Version simplifiée ≥ 15 mm (57 px)</div>
+                <div class="dim-row rose"><span class="rose">Digital :</span> Logo complet ≥ 40 mm (150 px) · Icône seule ≥ 22 mm (80 px)</div>
+                <div class="m-label" style="margin-top:1.2rem; margin-bottom:0.6rem">⚠️ Usages interdits</div>
+                <div style="padding:1rem; border:1px solid rgba(239,166,160,0.2); background:rgba(239,166,160,0.03); font-size:0.82rem; color:#a8b4c5; line-height:1.8">Ne pas déformer, étirer, recolorer ou incliner. Respecter uniquement les variations officielles autorisées.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="yt-supports">
+            <div class="supports-grid">
+              <div class="support-card rose"><div class="sup-icon">📄</div><div class="sup-name">Papier en-tête</div><div class="sup-desc">A4 · Documents officiels, courriers et rapports</div></div>
+              <div class="support-card rose"><div class="sup-icon">💳</div><div class="sup-name">Carte de visite</div><div class="sup-desc">Logo fond blanc · Nom, fonction et coordonnées</div></div>
+              <div class="support-card rose"><div class="sup-icon">🪧</div><div class="sup-name">Kakémono</div><div class="sup-desc">Événements, campagnes et actions terrain</div></div>
+              <div class="support-card rose"><div class="sup-icon">🎁</div><div class="sup-name">Goodies</div><div class="sup-desc">Gourde, mug, tote bag, casquette</div></div>
+              <div class="support-card rose"><div class="sup-icon">📱</div><div class="sup-name">Réseaux sociaux</div><div class="sup-desc">Facebook · Couverture · Stories Instagram</div></div>
+              <div class="support-card rose"><div class="sup-icon">🌐</div><div class="sup-name">Site web</div><div class="sup-desc">Recommandations logo et couleurs en ligne</div></div>
+              <div class="support-card rose"><div class="sup-icon">📸</div><div class="sup-name">Imagerie</div><div class="sup-desc">Style photographique humain et authentique</div></div>
+              <div class="support-card rose"><div class="sup-icon">🌸</div><div class="sup-name">Patterns</div><div class="sup-desc">Motifs dérivés : bouclier, silhouette, cœur, YT</div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL : AFRICOM -->
+    <div class="project-panel" id="panel-africom">
+      <div class="africom-block">
+        <div class="africom-header">
+          <div>
+            <div class="africom-cat">Branding · Identité visuelle · Manuel graphique · Communication</div>
+            <div class="africom-name">AFRICOM</div>
+            <div class="africom-sub">Charte graphique complète — Entreprise de communication africaine</div>
+          </div>
+          <div class="badges">
+            <span class="badge badge-africom">Branding complet</span>
+            <span class="badge badge-out">Communication</span>
+            <span class="badge badge-out">2025 – 2026</span>
+          </div>
+        </div>
+
+        <div class="africom-body">
+          <div class="africom-desc">
+            <p>Conception du <strong>manuel d'identité visuelle complet</strong> pour AFRICOM, une entreprise de communication dédiée à une Afrique moderne, créative et connectée. Ce projet couvre logotype, palette chromatique, typographie, supports d'édition et univers graphique décliné sur tous les formats.</p>
+            <p>Le logo stylisé en <strong>« A »</strong> symbolise l'ascension et le leadership. Un point jaune doré incarne la créativité et la lumière — l'union entre <strong>l'audace africaine et le professionnalisme international</strong>.</p>
+            <div class="m-label" style="margin-bottom:0.8rem">🎨 Palette chromatique</div>
+            <div class="color-row">
+              <div class="swatch"><div class="sw-circle" style="background:#262b5f"></div><div class="sw-label">Bleu Indigo</div><div class="sw-hex yellow">#262b5f</div></div>
+              <div class="swatch"><div class="sw-circle" style="background:#E0DA09; border-color:rgba(0,0,0,0.2)"></div><div class="sw-label">Jaune Doré</div><div class="sw-hex yellow">#E0DA09</div></div>
+              <div class="swatch"><div class="sw-circle" style="background:#FFFFFF; border-color:rgba(255,255,255,0.2)"></div><div class="sw-label">Blanc</div><div class="sw-hex yellow">#FFFFFF</div></div>
+              <div class="swatch"><div class="sw-circle" style="background:#B8BCCF"></div><div class="sw-label">Gris Bleuté</div><div class="sw-hex yellow">#B8BCCF</div></div>
+              <div class="swatch"><div class="sw-circle" style="background:#9FBF70"></div><div class="sw-label">Vert Sauge</div><div class="sw-hex yellow">#9FBF70</div></div>
+            </div>
+            <div class="m-label" style="margin-bottom:0.8rem">✍️ Typographie</div>
+            <div class="typo-inline blue" style="margin-bottom:0.8rem">
+              <div class="typo-tag blue">Oswald — Titres (Gras · 24pt/48pt)</div>
+              <div style="font-family:Georgia,serif; font-size:1.5rem; font-weight:700; color:var(--white); text-transform:uppercase; letter-spacing:0.08em">AFRICOM</div>
+            </div>
+            <div class="typo-inline blue">
+              <div class="typo-tag blue">Montserrat — Corps (Normal/Moyen · 12pt/18pt)</div>
+              <div class="typo-body-text">Entreprise jeune, dynamique et fière de ses racines africaines, avec une vision tournée vers l'avenir.</div>
+            </div>
+            <div class="m-label" style="margin-top:1.5rem; margin-bottom:0.6rem">📦 Livrables</div>
+            <ul class="deliv-list yellow">
+              <li>Logotype principal & variantes (fond clair / fond sombre)</li>
+              <li>Zone de protection & tailles minimales (print & digital)</li>
+              <li>Palette complète (HEX, RVB, CMJN, Pantone)</li>
+              <li>Système typographique Oswald + Montserrat</li>
+              <li>Papier en-tête & carte de visite</li>
+              <li>Goodies : T-shirt & casquette</li>
+              <li>Pattern, bureau, réseaux sociaux, kakémono, badge</li>
+            </ul>
+          </div>
+
+          <div class="africom-media">
+            <div>
+              <div class="m-label">🖋️ Logo principal</div>
+              <div class="africom-logo-preview">
+                <img src="images/logo-africom.png" alt="Logo AFRICOM" onerror="this.style.display='none';document.getElementById('afc-fallback').style.display='flex'" />
+                <div class="logo-fake" id="afc-fallback" style="display:none">
+                  <div class="logo-fake-icon">A</div>
+                  <div><div class="logo-fake-name">AFRI<span>COM</span></div><div class="logo-fake-tagline">Communication · Afrique Moderne</div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="m-label">🔄 Déclinaisons du logo</div>
+              <div class="africom-variants-grid">
+                <div><div class="africom-variant-box av-bg-dark"><img src="images/logo-africom-white.png" alt="Fond sombre" onerror="this.outerHTML='<span style=\'color:#E0DA09;font-weight:700;font-family:Georgia;font-size:0.9rem\'>AFRICOM</span>'" /></div><div class="av-label">Fond foncé</div></div>
+                <div><div class="africom-variant-box av-bg-light"><img src="images/logo-africom-dark.png" alt="Fond clair" onerror="this.outerHTML='<span style=\'color:#262b5f;font-weight:700;font-family:Georgia;font-size:0.9rem\'>AFRICOM</span>'" /></div><div class="av-label">Fond clair</div></div>
+                <div><div class="africom-variant-box av-bg-mid"><img src="images/logo-africom-icon.png" alt="Icône seule" onerror="this.outerHTML='<div style=\'width:40px;height:40px;background:#E0DA09;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-weight:900;color:#262b5f\'>A</div>'" /></div><div class="av-label">Icône seule</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="m-label">🗂️ Supports produits</div>
+              <div class="africom-visuals">
+                <div class="africom-visual-box"><img src="images/africom-papier-entete.png" alt="Papier en-tête" onerror="this.style.display='none'" /><div class="av-icon">📄</div><span>Papier en-tête</span></div>
+                <div class="africom-visual-box"><img src="images/africom-carte-visite.png" alt="Carte de visite" onerror="this.style.display='none'" /><div class="av-icon">💳</div><span>Carte de visite</span></div>
+                <div class="africom-visual-box"><img src="images/africom-tshirt.png" alt="T-shirt" onerror="this.style.display='none'" /><div class="av-icon">👕</div><span>T-shirt</span></div>
+                <div class="africom-visual-box"><img src="images/africom-reseaux.png" alt="Réseaux sociaux" onerror="this.style.display='none'" /><div class="av-icon">📱</div><span>Réseaux sociaux</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="africom-tabs-wrap">
+          <div class="tabs-bar blue">
+            <button class="tab-btn blue-active" onclick="showTab('afc','palette',this)">🎨 Palette complète</button>
+            <button class="tab-btn" onclick="showTab('afc','typo',this)">✍️ Typographie</button>
+            <button class="tab-btn" onclick="showTab('afc','logo',this)">🔖 Logo & Règles</button>
+          </div>
+          <div class="tab-panel active" id="afc-palette">
+            <div class="pal-grid">
+              <div class="pal-item blue"><div class="pal-swatch" style="background:#262b5f"></div><div><div class="pal-name">Bleu Indigo Foncé</div><div class="pal-hex blue">#262b5f · RVB 38/43/95 · Pantone 2756 C</div><div class="pal-desc">Confiance, stabilité et autorité. Couleur dominante de la marque.</div></div></div>
+              <div class="pal-item blue"><div class="pal-swatch" style="background:#E0DA09; border:1px solid rgba(0,0,0,0.1)"></div><div><div class="pal-name">Jaune Doré</div><div class="pal-hex blue">#E0DA09 · RVB 224/218/9 · Pantone 3965 C</div><div class="pal-desc">Lumière, joie, énergie et optimisme. Succès et créativité africaine.</div></div></div>
+              <div class="pal-item blue"><div class="pal-swatch" style="background:#FFFFFF; border:1px solid rgba(0,0,0,0.1)"></div><div><div class="pal-name">Blanc</div><div class="pal-hex blue">#FFFFFF · RVB 255/255/255</div><div class="pal-desc">Équilibre, clarté et respiration. Fond neutre pour la lisibilité.</div></div></div>
+              <div class="pal-item blue"><div class="pal-swatch" style="background:#B8BCCF"></div><div><div class="pal-name">Gris Bleuté Clair</div><div class="pal-hex blue">#B8BCCF · Secondaire</div><div class="pal-desc">Visuels digitaux et supports internes.</div></div></div>
+              <div class="pal-item blue"><div class="pal-swatch" style="background:#333333"></div><div><div class="pal-name">Gris Anthracite</div><div class="pal-hex blue">#333333 · Secondaire</div><div class="pal-desc">Alternative sombre pour textes et déclinaisons créatives.</div></div></div>
+              <div class="pal-item blue"><div class="pal-swatch" style="background:#9FBF70"></div><div><div class="pal-name">Vert Sauge</div><div class="pal-hex blue">#9FBF70 · Secondaire</div><div class="pal-desc">Dynamisme et variété dans les déclinaisons créatives.</div></div></div>
+            </div>
+          </div>
+          <div class="tab-panel" id="afc-typo">
+            <div class="typo-block blue">
+              <div class="typo-block-hdr blue"><span class="typo-role blue">Police principale — OSWALD</span><span class="typo-usage">Titres · Gras · 24pt/48pt · Hauteur 120%</span></div>
+              <div class="specimen-oswald">AFRICOM — Communication Africaine</div>
+              <div style="margin-top:0.8rem; font-size:0.78rem; color:var(--text-muted)">Style moderne, condensé et affirmé. Présence forte et excellente lisibilité. Design géométrique à fort impact.</div>
+            </div>
+            <div class="typo-block blue">
+              <div class="typo-block-hdr blue"><span class="typo-role blue">Police secondaire — MONTSERRAT</span><span class="typo-usage">Corps de texte · 12pt/18pt · Normal/Moyen</span></div>
+              <div class="specimen-body">Entreprise jeune, dynamique et fière de ses racines africaines, tout en adoptant une vision tournée vers l'avenir. Chaque élément traduit nos valeurs de créativité, de professionnalisme et d'excellence.</div>
+              <div style="margin-top:0.8rem; font-size:0.78rem; color:var(--text-muted)">Formes arrondies et harmonieuses. Complète parfaitement Oswald — lecture fluide et élégante.</div>
+            </div>
+          </div>
+          <div class="tab-panel" id="afc-logo">
+            <div class="rules-grid">
+              <div>
+                <div class="m-label" style="margin-bottom:1rem">📐 Zone de protection</div>
+                <div style="padding:1rem; border:1px solid rgba(38,43,95,0.5); background:rgba(38,43,95,0.08); margin-bottom:1rem; font-size:0.88rem; color:#a8b4c5; line-height:1.8">Zone définie par la <span style="color:var(--africom-yellow); font-weight:600">hauteur X de l'icône hexagone</span>. Aucun élément ne peut empiéter dans cet espace.</div>
+                <div class="dim-row blue"><span class="yellow">Print :</span> Logo complet ≥ 25 mm (95 px) · Icône seule ≥ 15 mm (57 px)</div>
+                <div class="dim-row blue"><span class="yellow">Digital :</span> Logo complet ≥ 40 mm (150 px) · Icône seule ≥ 22 mm (80 px)</div>
+              </div>
+              <div>
+                <div class="m-label" style="margin-bottom:1rem">✅ Symbologie & usages</div>
+                <div style="display:flex; flex-direction:column; gap:0.7rem">
+                  <div class="rule-item blue"><div class="rule-ic">🔷</div><div><div class="rule-t">Forme en « A »</div><div class="rule-d">Évoque Afrique & AFRICOM — ascension, stabilité et leadership.</div></div></div>
+                  <div class="rule-item blue"><div class="rule-ic">🟡</div><div><div class="rule-t">Point jaune doré</div><div class="rule-d">Idée, créativité et lumière — essentiels en communication visuelle.</div></div></div>
+                  <div class="rule-item blue"><div class="rule-ic">⚠️</div><div><div class="rule-t">Usages interdits</div><div class="rule-d">Ne pas déformer, recolorer ou appliquer d'effets non prévus.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- GALERIE -->
+  <section id="gallery">
+    <div class="reveal">
+      <p class="eyebrow">04 — Portfolio visuel</p>
+      <h2 class="s-title">Galerie de créations</h2>
+      <div class="s-rule"></div>
+    </div>
+    <p class="gallery-intro reveal">Visuels réalisés avec Canva et contenus générés par intelligence artificielle — un aperçu de mon univers créatif entre design humain et puissance de l'IA.</p>
+    <div class="gallery-tabs reveal">
+      <button class="gtab active" onclick="filterGallery('all',this)">Tout voir</button>
+      <button class="gtab" onclick="filterGallery('canva',this)">Canva</button>
+      <button class="gtab" onclick="filterGallery('ia',this)">IA Générative</button>
+      <button class="gtab" onclick="filterGallery('logo',this)">Logos</button>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="gallery-item" data-cat="canva"><img src="images/canva-1.png" alt="Visuel Canva 1" /><div class="g-icon">🖼️</div><span>Visuel Canva 1</span></div>
+      <div class="gallery-item" data-cat="canva"><img src="images/canva-2.png" alt="Visuel Canva 2" /><div class="g-icon">🖼️</div><span>Visuel Canva 2</span></div>
+      <div class="gallery-item" data-cat="canva"><img src="images/canva-3.png" alt="Visuel Canva 3" /><div class="g-icon">🖼️</div><span>Visuel Canva 3</span></div>
+      <div class="gallery-item" data-cat="ia"><img src="images/ia-1.png" alt="Visuel IA 1" /><div class="g-icon">🤖</div><span>Visuel IA 1</span></div>
+      <div class="gallery-item" data-cat="ia"><img src="images/ia-2.png" alt="Visuel IA 2" /><div class="g-icon">🤖</div><span>Visuel IA 2</span></div>
+      <div class="gallery-item" data-cat="ia"><img src="images/ia-3.png" alt="Visuel IA 3" /><div class="g-icon">🤖</div><span>Visuel IA 3</span></div>
+      <div class="gallery-item" data-cat="logo"><img src="images/logo-ty.png" alt="Logo TY Digital AI" /><div class="g-icon">🏷️</div><span>Logo TY Digital AI</span></div>
+      <div class="gallery-item" data-cat="logo"><img src="images/SOTRABAT.png" alt="Logo SOTRABAT" /><div class="g-icon">🏷️</div><span>Logo SOTRABAT</span></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <p class="eyebrow">05 — Travaillons ensemble</p>
+      <h2 class="s-title">Me contacter</h2>
+      <div class="s-rule" style="margin:1rem auto 2rem"></div>
+    </div>
+    <p class="contact-intro reveal">Vous avez un projet digital, une campagne à lancer ou cherchez un profil Digital AI Creator ? N'hésitez pas à me contacter — je réponds rapidement.</p>
+    <div class="contact-cards reveal">
+      <a href="mailto:T.yazidcheichk@gmail.com" class="contact-card">
+        <div class="cc-icon">✉️</div>
+        <div><div class="cc-type">Email</div><div class="cc-val">T.yazidcheichk@gmail.com</div></div>
+      </a>
+      <a href="https://wa.me/2250711951616" target="_blank" class="contact-card">
+        <div class="cc-icon">📱</div>
+        <div><div class="cc-type">WhatsApp</div><div class="cc-val">(+225) 07 11 95 16 16</div></div>
+      </a>
+      <div class="contact-card" style="cursor:default">
+        <div class="cc-icon">📍</div>
+        <div><div class="cc-type">Localisation</div><div class="cc-val">Abidjan, Angré 8ᵉ tranche</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">TY Digital AI</div>
+    <div class="footer-copy">© 2025 Traore Yazid — Digital AI Creator · Abidjan, Côte d'Ivoire</div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // Nav active
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY + 130;
+      document.querySelectorAll('section[id]').forEach(s => {
+        const a = document.querySelector('.nav-links a[href="#' + s.id + '"]');
+        if (a) a.classList.toggle('nav-active', y >= s.offsetTop && y < s.offsetTop + s.offsetHeight);
+      });
+    });
+
+    // Switcher projet
+    function switchProj(id, btn) {
+      document.querySelectorAll('.proj-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.project-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = document.getElementById('panel-' + id);
+      if (panel) {
+        panel.classList.add('active');
+        panel.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      }
+    }
+
+    // Onglets
+    function showTab(ns, id, btn) {
+      const bar = btn.closest('.tabs-bar');
+      bar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('rose-active', 'blue-active'));
+      btn.classList.add(ns === 'yt' ? 'rose-active' : 'blue-active');
+      const wrap = btn.closest('.yt-block, .africom-tabs-wrap');
+      wrap.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById(ns + '-' + id);
+      if (panel) panel.classList.add('active');
+    }
+
+    // Gallery filter
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.gtab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'flex' : 'none';
+      });
+    }
+
+    // Lightbox
+    function openLightbox(src, alt) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = alt || '';
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.getElementById('lightbox-img').src = '';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.gallery-item img, .visual-box-single img, .africom-visual-box img, .africom-logo-preview img').forEach(img => {
+        img.addEventListener('click', e => { e.stopPropagation(); openLightbox(img.src, img.alt); });
+      });
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          if (img) openLightbox(img.src, img.alt);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
